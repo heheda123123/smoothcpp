@@ -19,6 +19,8 @@ the test/ dir is the best tutorial
 * format method accept strftime format string to generate string
 * static method sleep will sleep n milliseconds
 * Time object can minus other one to get n milliseconds
+* elapse method get n milliseconds from constructor or call reset
+* reset 
 
 ### string lib funcs
 * to_lower to_upper

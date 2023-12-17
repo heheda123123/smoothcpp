@@ -7,7 +7,8 @@ Easy to use first cross platform CPP library.
 
 ## build
 need support c++ 17  
-test in windows and linux  
+tested in windows and linux  
+no other deps.  
 in source code dir, run `xmake`  
 
 ## feature details
@@ -20,7 +21,7 @@ the test/ dir is the best tutorial
 * static method sleep will sleep n milliseconds
 * Time object can minus other one to get n milliseconds
 * elapse method get n milliseconds from constructor or call reset
-* reset 
+* reset the Time start time
 
 ### string lib funcs
 * to_lower to_upper
@@ -29,4 +30,7 @@ the test/ dir is the best tutorial
 * join
 * has_prefix has_suffix contains
 * format, replcement of sprintf
-* format, print vector values
+* format, print vector and map values
+
+## todo
+* use test lib improve test process

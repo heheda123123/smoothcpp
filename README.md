@@ -5,11 +5,13 @@ Easy to use first cross platform CPP library.
 * time
 
 ## build
-need support c++ 17
-test in windows and linux
-in source code dir, run `xmake`
+need support c++ 17  
+test in windows and linux  
+in source code dir, run `xmake`  
 
-## feature details 
+## feature details
+the test/ dir is the best tutorial
+
 ### time lib funcs
 * create Time object will record current time
 * show method will print the time

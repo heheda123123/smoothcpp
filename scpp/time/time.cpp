@@ -1,78 +1,83 @@
 #include "time.h"
 #include <iostream>
+#include <chrono>
+#include <sstream>
+#include <iomanip>
+#include <thread>
+
 using namespace scpp;
 
-Time::Time()
-{
-    time_t ticks = time(nullptr);
-    get_local_time(&m_tm, &ticks);
+Time::Time() {
+	auto t_now = std::chrono::system_clock::to_time_t(m_now);
+	get_local_time(&this->m_now_tm, &t_now);
+}
 
-    struct timeval tv = {0};
-    get_time_of_day(&tv);
-    m_sec = tv.tv_sec;
-    m_usec = tv.tv_usec;
+long long Time::elapse() const {
+	auto now = std::chrono::system_clock::now();
+	return std::chrono::duration_cast<std::chrono::milliseconds>(now - m_now).count();
+}
+
+void Time::reset() {
+	m_now = std::chrono::system_clock::now();
+	auto t_now = std::chrono::system_clock::to_time_t(m_now);
+	get_local_time(&this->m_now_tm, &t_now);
 }
 
 int Time::year() const
 {
-    return m_tm.tm_year + 1900;
+	return m_now_tm.tm_year + 1900;
 }
 
 int Time::month() const
 {
-    return m_tm.tm_mon + 1;
+	return m_now_tm.tm_mon + 1;
 }
 
 int Time::day() const
 {
-    return m_tm.tm_mday;
+	return m_now_tm.tm_mday;
 }
 
 int Time::hour() const
 {
-    return m_tm.tm_hour;
+	return m_now_tm.tm_hour;
 }
 
 int Time::minute() const
 {
-    return m_tm.tm_min;
+	return m_now_tm.tm_min;
 }
 
 int Time::second() const
 {
-    return m_tm.tm_sec;
+	return m_now_tm.tm_sec;
 }
 
 int Time::week() const
 {
-    return m_tm.tm_wday;
+	return m_now_tm.tm_wday;
 }
 
 double Time::seconds() const
 {
-    return m_sec;
+	return m_now_tm.tm_sec;
 }
 
-double Time::milliseconds() const
+long long Time::operator-(const Time &other) const
 {
-    return m_sec * 1000.0 + m_usec / 1000.0;
-}
-
-double Time::operator - (const Time & other) const
-{
-    return (m_sec - other.m_sec) * 1000000 + (m_usec - other.m_usec);
+	return std::chrono::duration_cast<std::chrono::milliseconds>(this->m_now - other.m_now).count();
 }
 
 std::string Time::format(const std::string& format) const
 {
-    char timestamp[32] = {0};
-    strftime(timestamp, sizeof(timestamp), format.data(), &m_tm);
-    return timestamp;
+	std::stringstream ss;
+	ss << std::put_time(&m_now_tm, format.c_str());
+	return ss.str();
 }
 
 void Time::show() const
 {
-    std::cout << year() << "-" << month() << "-" << day() << " " << hour() << ":" << minute() << ":" << second() << std::endl;
+    std::cout << format() << std::endl;
 }
 
 void Time::get_local_time(struct tm * tm, const time_t * ticks)
@@ -84,32 +89,8 @@ void Time::get_local_time(struct tm * tm, const time_t * ticks)
 #endif
 }
 
-void Time::get_time_of_day(struct timeval * tv)
-{
-#ifdef _WIN32
-    SYSTEMTIME wtm;
-    GetLocalTime(&wtm);
-    struct tm tm;
-    tm.tm_year = wtm.wYear - 1900;
-    tm.tm_mon = wtm.wMonth - 1;
-    tm.tm_mday = wtm.wDay;
-    tm.tm_hour = wtm.wHour;
-    tm.tm_min = wtm.wMinute;
-    tm.tm_sec = wtm.wSecond;
-    tm.tm_isdst  = -1;
-    time_t ticks = mktime(&tm);
-    tv->tv_sec = ticks;
-    tv->tv_usec = wtm.wMilliseconds * 1000;
-#else
-    gettimeofday(tv, nullptr);
-#endif
-}
 
 void Time::sleep(int milliseconds)
 {
-#ifdef _WIN32
-    Sleep(milliseconds);
-#else
-    usleep(milliseconds * 1000);
-#endif
+	std::this_thread::sleep_for(std::chrono::milliseconds{milliseconds});
 }

@@ -18,4 +18,4 @@ the test/ dir is the best tutorial
 * show method will print the time
 * format method accept strftime format string to generate string
 * static method sleep will sleep n milliseconds
-* Time object can minus other one to get n microseconds
+* Time object can minus other one to get n milliseconds

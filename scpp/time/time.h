@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <chrono>
 
 #include <ctime>
 #ifdef _WIN32
@@ -15,7 +16,6 @@ namespace scpp
 	{
 	public:
 		Time();
-		~Time() = default;
 
 		int year() const;
 		int month() const;
@@ -24,26 +24,27 @@ namespace scpp
 		int minute() const;
 		int second() const;
 		int week() const;
-
 		double seconds() const;
-		double milliseconds() const;
-		double operator -(const Time & other) const;
+		
+		// use milliseconds
+		long long operator -(const Time &other) const;
 
 		// because implement use strftime, should ensure format end with 00
 		// so use std::string as parameter
-		std::string format(const std::string & format) const;
+		std::string format(const std::string & format = "%Y-%m-%d %H:%M:%S") const;
 
 		static void sleep(int milliseconds);
 
 		void show() const;
+		long long elapse() const;
+		void reset();
 
 	private:
 		void get_local_time(struct tm * tm, const time_t * ticks);
-		void get_time_of_day(struct timeval * tv);
 
 	private:
-		struct tm m_tm = {0};
-		int m_sec = 0;
-		int m_usec = 0;
+		decltype(std::chrono::system_clock::now())m_now = std::chrono::system_clock::now();
+
+		struct tm m_now_tm = {0};
 	};
 }

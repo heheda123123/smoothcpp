@@ -34,5 +34,8 @@ int main()
 	
 	std::cout << format("name=%s age=%d", "jack", 18) << std::endl;
 
+	auto amap = std::map < std::string, int> {{"1", 2}, {"3", 4}, {"5", 6}};
+	std::cout << format(amap) << std::endl;
+
 	return 0;
 }

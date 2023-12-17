@@ -3,6 +3,7 @@ Easy to use first cross platform CPP library.
 
 ## feature
 * time
+* string
 
 ## build
 need support c++ 17  

@@ -7,7 +7,7 @@ target("smoothcpp")
 	set_kind("$(kind)")
 	add_files("scpp/**.cpp")
 	add_includedirs(".", {public = true})
-
+	add_headerfiles("(scpp/**.h)")
 	
 for _, file in ipairs(os.files("test/*.cpp")) do
 	local name = path.basename(file)

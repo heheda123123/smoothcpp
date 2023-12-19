@@ -43,3 +43,7 @@ the test dir is the best tutorial
 * any class construct with bool/int/double/string(const char*)
 * any object can cast to above type
 * type mismatch will cause logic_error exception
+
+## todo
+* add log lib
+* add argparse lib

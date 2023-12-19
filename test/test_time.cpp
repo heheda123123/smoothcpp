@@ -12,14 +12,14 @@ TEST_CASE("testing Time constructor") {
 
 TEST_CASE("testing Time operator-") {
     Time t1;
-    Time::sleep(2000);
+    Time::sleep(1000);
     Time t2;
-    CHECK((t2 - t1 - 2000) < 100);
+    CHECK((t2 - t1 - 1000) < 100);
 }
 
 TEST_CASE("testing Time reset") {
     Time t1;
-    Time::sleep(2000);
+    Time::sleep(1000);
     Time t2;
     t1.reset();
     CHECK((t2 - t1) < 100);

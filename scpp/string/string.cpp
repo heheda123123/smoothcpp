@@ -8,19 +8,19 @@
 
 std::string scpp::to_lower(std::string str)
 {
-	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-	return str;
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
 }
 
 std::string scpp::to_upper(std::string str)
 {
-	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-	return str;
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    return str;
 }
 
 std::string scpp::ltrim(std::string_view input, std::string_view trims)
 {
-	std::string str(input);
+    std::string str(input);
     size_t pos = str.find_first_not_of(trims);
     if (pos != std::string::npos)
         str.erase(0, pos);
@@ -31,7 +31,7 @@ std::string scpp::ltrim(std::string_view input, std::string_view trims)
 
 std::string scpp::rtrim(std::string_view input, std::string_view trims)
 {
-	std::string str(input);
+    std::string str(input);
     size_t pos = str.find_last_not_of(trims);
     if (pos != std::string::npos)
         str.erase(pos + 1);
@@ -42,45 +42,45 @@ std::string scpp::rtrim(std::string_view input, std::string_view trims)
 
 std::string scpp::trim(std::string_view input, std::string_view trims)
 {
-	std::string str = ltrim(input, trims);
+    std::string str = ltrim(input, trims);
     return rtrim(str, trims);
 }
 
 std::vector<std::string> scpp::split_str(const std::string &input, const std::string &separator) {
-	std::vector<std::string> tokens;
-	size_t start = 0, end;
+    std::vector<std::string> tokens;
+    size_t start = 0, end;
 
-	while ((end = input.find(separator, start)) != std::string::npos) {
-		if (end != start) {
-			tokens.push_back(input.substr(start, end - start));
-		}
-		start = end + separator.length();
-	}
+    while ((end = input.find(separator, start)) != std::string::npos) {
+        if (end != start) {
+            tokens.push_back(input.substr(start, end - start));
+        }
+        start = end + separator.length();
+    }
 
-	if (start < input.length()) {
-		tokens.push_back(input.substr(start));
-	}
+    if (start < input.length()) {
+        tokens.push_back(input.substr(start));
+    }
 
-	return tokens;
+    return tokens;
 }
 
 std::vector<std::string> scpp::split_chars(const std::string & input, const std::string & separator)
 {
-	std::vector<std::string> output;
-	size_t last = 0;
-	size_t index = input.find_first_of(separator, last);
-	while (index != std::string::npos)
-	{
-		std::string str = input.substr(last, index - last);
-		output.push_back(str);
-		last = index + 1;
-		index = input.find_first_of(separator, last);
-	}
-	if (index - last > 0)
-	{
-		output.push_back(input.substr(last, index - last));
-	}
-	return output;
+    std::vector<std::string> output;
+    size_t last = 0;
+    size_t index = input.find_first_of(separator, last);
+    while (index != std::string::npos)
+    {
+        std::string str = input.substr(last, index - last);
+        output.push_back(str);
+        last = index + 1;
+        index = input.find_first_of(separator, last);
+    }
+    if (index - last > 0)
+    {
+        output.push_back(input.substr(last, index - last));
+    }
+    return output;
 }
 
 
@@ -118,24 +118,24 @@ bool scpp::has_suffix(std::string_view input, std::string_view suffix)
 }
 
 bool scpp::contains(std::string_view str, std::string_view substr) {
-	return str.find(substr) != std::string::npos;
+    return str.find(substr) != std::string::npos;
 }
 
 std::string scpp::format(const char *format,...)
 {
-	std::string result;
+    std::string result;
     va_list arg_ptr;
     va_start(arg_ptr, format);
     int len = vsnprintf(nullptr, 0, format, arg_ptr);
     va_end(arg_ptr);
     if (len > 0)
     {
-		auto buf = std::make_unique<char[]>(len + 1);
+        auto buf = std::make_unique<char[]>(len + 1);
         va_start(arg_ptr, format);
         vsnprintf(buf.get(), len + 1, format, arg_ptr);
         va_end(arg_ptr);
         buf[len] = 0;
-		result = buf.get();
+        result = buf.get();
     }
     return result;
 }

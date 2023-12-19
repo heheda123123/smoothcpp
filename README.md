@@ -1,18 +1,23 @@
 # smoothcpp
-Easy to use first cross platform CPP library.
+Easy to use first cross platform cpp library.
+
+## goal
+As a supplement to the c++ standard library.  
+Has the following characteristics:  
+* intuitive
+* cross platform
+* no other deps
 
 ## feature
 * time
 * string
 
 ## build
-need support c++ 17  
-tested in windows and linux  
-no other deps.  
+compiler need support c++ 17  
 in source code dir, run `xmake`  
 
 ## feature details
-the test/ dir is the best tutorial
+the test dir is the best tutorial
 
 ### time lib funcs
 * create Time object will record current time

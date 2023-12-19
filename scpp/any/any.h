@@ -5,7 +5,7 @@
 
 namespace scpp
 {
-    class any
+    class Any
     {
     public:
         enum class Type
@@ -17,13 +17,12 @@ namespace scpp
             V_STRING
         };
 
-        any();
-        any(bool any);
-        any(int any);
-        any(double any);
-        any(const char *any);
-        any(const std::string & any);
-        ~any() = default;
+		Any();
+		Any(bool any);
+		Any(int any);
+		Any(double any);
+		Any(const char *any);
+		Any(const std::string & any);
 
         Type type() const;
         bool is_null() const;
@@ -32,15 +31,15 @@ namespace scpp
         bool is_double() const;
         bool is_string() const;
 
-        any & operator = (bool any);
-        any & operator = (int any);
-        any & operator = (double any);
-        any & operator = (const char *any);
-        any & operator = (const std::string & any);
-        any & operator = (const any & any);
+		Any & operator = (bool any);
+		Any & operator = (int any);
+		Any & operator = (double any);
+		Any & operator = (const char *any);
+		Any & operator = (const std::string & any);
+		Any & operator = (const Any & any);
 
-        bool operator == (const any & other);
-        bool operator != (const any & other);
+        bool operator == (const Any & other);
+		bool operator != (const Any & other);
 
         operator bool();
         operator bool() const;
@@ -54,18 +53,18 @@ namespace scpp
         operator std::string();
         operator std::string() const;
 
-        friend std::ostream & operator << (std::ostream & os, const any & value)
+		friend std::ostream & operator << (std::ostream & os, const Any & value)
         {
             switch (value.m_type) {
-            case any::Type::V_STRING:
+			case Any::Type::V_STRING:
                 os << "type: string, value: "; break;
-            case any::Type::V_BOOL:
+			case Any::Type::V_BOOL:
                 os << "type: bool, value: "; break;
-            case any::Type::V_DOUBLE:
+			case Any::Type::V_DOUBLE:
                 os << "type: double, value: "; break;
-            case any::Type::V_NULL:
+			case Any::Type::V_NULL:
                 os << "type: null, value: "; break;
-            case any::Type::V_INT:
+			case Any::Type::V_INT:
                 os << "type: int, value: "; break;
             }
             os << value.m_value;

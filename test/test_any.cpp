@@ -6,8 +6,8 @@
 
 using namespace scpp;
 
-TEST_CASE("testing any null") {
-    any a;
+TEST_CASE("testing Any null") {
+	Any a;
     std::stringstream ss;
     ss << a;
     CHECK(contains(ss.str(), "type: null") == true);
@@ -15,8 +15,8 @@ TEST_CASE("testing any null") {
     CHECK_THROWS_WITH(b = a, "not int type");
 }
 
-TEST_CASE("testing any bool") {
-    any a = true;
+TEST_CASE("testing Any bool") {
+	Any a = true;
     std::stringstream ss;
     ss << a;
     CHECK(contains(ss.str(), "type: bool") == true);
@@ -26,8 +26,8 @@ TEST_CASE("testing any bool") {
     CHECK(c == true);
 }
 
-TEST_CASE("testing any int") {
-    any a = 123;
+TEST_CASE("testing Any int") {
+	Any a = 123;
     std::stringstream ss;
     ss << a;
     CHECK(contains(ss.str(), "type: int") == true);
@@ -37,8 +37,8 @@ TEST_CASE("testing any int") {
     CHECK(c == 123);
 }
 
-TEST_CASE("testing any double") {
-    any a = 123.1;
+TEST_CASE("testing Any double") {
+	Any a = 123.1;
     std::stringstream ss;
     ss << a;
     CHECK(contains(ss.str(), "type: double") == true);
@@ -48,8 +48,8 @@ TEST_CASE("testing any double") {
     CHECK(c == 123.1);
 }
 
-TEST_CASE("testing any string") {
-    any a = "123";
+TEST_CASE("testing Any string") {
+	Any a = "123";
     std::stringstream ss;
     ss << a;
     CHECK(contains(ss.str(), "type: string") == true);

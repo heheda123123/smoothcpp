@@ -4,101 +4,101 @@
 
 using namespace scpp;
 
-any::any() : m_type(Type::V_NULL)
+Any::Any() : m_type(Type::V_NULL)
 {
 }
 
-any::any(bool value) : m_type(Type::V_BOOL)
+Any::Any(bool value) : m_type(Type::V_BOOL)
 {
     m_value = value ? "true" : "false";
 }
 
-any::any(int value) : m_type(Type::V_INT)
+Any::Any(int value) : m_type(Type::V_INT)
 {
     m_value = std::to_string(value);
 }
 
-any::any(double value) : m_type(Type::V_DOUBLE)
+Any::Any(double value) : m_type(Type::V_DOUBLE)
 {
     m_value = std::to_string(value);
 }
 
-any::any(const char *value) : m_type(Type::V_STRING)
+Any::Any(const char *value) : m_type(Type::V_STRING)
 {
     m_value = value;
 }
 
-any::any(const std::string & value) : m_type(Type::V_STRING)
+Any::Any(const std::string & value) : m_type(Type::V_STRING)
 {
     m_value = value;
 }
 
-any::Type any::type() const
+Any::Type Any::type() const
 {
     return m_type;
 }
 
-bool any::is_null() const
+bool Any::is_null() const
 {
     return m_type == Type::V_NULL;
 }
 
-bool any::is_bool() const
+bool Any::is_bool() const
 {
     return m_type == Type::V_BOOL;
 }
 
-bool any::is_int() const
+bool Any::is_int() const
 {
     return m_type == Type::V_INT;
 }
 
-bool any::is_double() const
+bool Any::is_double() const
 {
     return m_type == Type::V_DOUBLE;
 }
 
-bool any::is_string() const
+bool Any::is_string() const
 {
     return m_type == Type::V_STRING;
 }
 
-any & any::operator = (bool value)
+Any & Any::operator = (bool value)
 {
     m_type = Type::V_BOOL;
     m_value = value ? "true" : "false";
     return *this;
 }
 
-any & any::operator = (int value)
+Any & Any::operator = (int value)
 {
     m_type = Type::V_INT;
     m_value = std::to_string(value);
     return *this;
 }
 
-any & any::operator = (double value)
+Any & Any::operator = (double value)
 {
     m_type = Type::V_DOUBLE;
     m_value = std::to_string(value);
     return *this;
 }
 
-any & any::operator = (const char * value)
+Any & Any::operator = (const char *value)
 {
     m_type = Type::V_STRING;
     m_value = value;
     return *this;
 }
 
-any & any::operator = (const std::string & value)
+Any & Any::operator = (const std::string & value)
 {
     m_type = Type::V_STRING;
     m_value = value;
     return *this;
 }
 
-any & any::operator = (const any & value)
+Any & Any::operator = (const Any & value)
 {
     if (this == &value)
     {
@@ -109,7 +109,7 @@ any & any::operator = (const any & value)
     return *this;
 }
 
-bool any::operator == (const any & other)
+bool Any::operator == (const Any & other)
 {
     if (m_type != other.m_type)
     {
@@ -118,12 +118,12 @@ bool any::operator == (const any & other)
     return m_value == other.m_value;
 }
 
-bool any::operator != (const any & other)
+bool Any::operator != (const Any & other)
 {
     return !(m_value == other.m_value);
 }
 
-any::operator bool()
+Any::operator bool()
 {
     if (m_type != Type::V_BOOL) {
         throw std::logic_error{"not bool type"};
@@ -131,7 +131,7 @@ any::operator bool()
     return m_value == "true";
 }
 
-any::operator bool() const
+Any::operator bool() const
 {
     if (m_type != Type::V_BOOL) {
         throw std::logic_error{"not bool type"};
@@ -139,7 +139,7 @@ any::operator bool() const
     return m_value == "true";
 }
 
-any::operator int()
+Any::operator int()
 {
     if (m_type != Type::V_INT) {
         throw std::logic_error{"not int type"};
@@ -151,7 +151,7 @@ any::operator int()
     return value;
 }
 
-any::operator int() const
+Any::operator int() const
 {
     if (m_type != Type::V_INT) {
         throw std::logic_error{"not int type"};
@@ -163,7 +163,7 @@ any::operator int() const
     return value;
 }
 
-any::operator double()
+Any::operator double()
 {
     if (m_type != Type::V_DOUBLE) {
         throw std::logic_error{"not double type"};
@@ -175,7 +175,7 @@ any::operator double()
     return value;
 }
 
-any::operator double() const
+Any::operator double() const
 {
     if (m_type != Type::V_DOUBLE) {
         throw std::logic_error{"not double type"};
@@ -187,7 +187,7 @@ any::operator double() const
     return value;
 }
 
-any::operator std::string()
+Any::operator std::string()
 {
     if (m_type != Type::V_STRING) {
         throw std::logic_error{"not string type"};
@@ -195,7 +195,7 @@ any::operator std::string()
     return m_value;
 }
 
-any::operator std::string() const
+Any::operator std::string() const
 {
     if (m_type != Type::V_STRING) {
         throw std::logic_error{"not string type"};

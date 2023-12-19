@@ -7,6 +7,7 @@ Has the following characteristics:
 * intuitive
 * cross platform
 * no other deps
+* all funcs use doctest test
 
 ## feature
 * time
@@ -36,6 +37,3 @@ the test dir is the best tutorial
 * has_prefix has_suffix contains
 * format, replcement of sprintf
 * format, print vector and map values
-
-## todo
-* use test lib improve test process

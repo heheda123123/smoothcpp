@@ -12,6 +12,7 @@ Has the following characteristics:
 ## feature
 * time
 * string
+* any
 
 ## build
 compiler need support c++ 17  
@@ -37,3 +38,8 @@ the test dir is the best tutorial
 * has_prefix has_suffix contains
 * format, replcement of sprintf
 * to_string, support print vector and map
+
+### any lib funcs
+* any class construct with bool/int/double/string(const char*)
+* any object can cast to above type
+* type mismatch will cause logic_error exception

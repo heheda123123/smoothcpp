@@ -1,26 +1,32 @@
-#include <iostream>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest/doctest.h"
 #include "scpp/time/time.h"
+#include "scpp/string/string.h"
+
 using namespace scpp;
 
-
-int main()
-{
-    std::cout << "test display time\n";
+TEST_CASE("testing Time constructor") {
     Time t1;
-    t1.show();
-    std::cout << t1.format("%Y-%m-%d %H:%M:%S") << std::endl;
-
-    std::cout << "test sleep 500ms\n";
-    Time t2;
-    Time::sleep(500);
-    Time t3;
-    std::cout << t3 - t2 << std::endl;
-
-    std::cout << "test reset and elapse\n";
-    t1.reset();
-    Time::sleep(500);
-    std::cout << "t1 reset elapse " << t1.elapse() << std::endl;
-    
-
-    return 0;
+    CHECK(contains(t1.format("%Y-%m-%d %H:%M:%S"), "-") == true);
 }
+
+TEST_CASE("testing Time operator-") {
+    Time t1;
+    Time::sleep(2000);
+    Time t2;
+    CHECK((t2 - t1 - 2000) < 100);
+}
+
+TEST_CASE("testing Time reset") {
+    Time t1;
+    Time::sleep(2000);
+    Time t2;
+    t1.reset();
+    CHECK((t2 - t1) < 100);
+}
+
+TEST_CASE("testing Time elapse") {
+    Time t1;
+    CHECK(t1.elapse() < 100);
+}
+

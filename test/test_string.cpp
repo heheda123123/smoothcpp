@@ -1,41 +1,87 @@
-#include <iostream>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "scpp/string/string.h"
+#include "doctest/doctest.h"
 
 using namespace scpp;
 
 
-int main()
-{
-    std::cout << to_lower("aAaAAbb") << "\n";
-    std::cout << to_upper("aaaAAbb") << "\n";
+TEST_CASE("testing to_lower") {
+    CHECK(to_lower("aAaAAbb") == "aaaaabb");
+    CHECK(to_lower("aAaAA  bb") == "aaaaa  bb");
+}
 
-    std::cout << ltrim("hello world", "eh") << "\n";
-    std::cout << rtrim("hello world", "drl") << "\n";
-    std::cout << trim("hello world", "held") << "\n";
+TEST_CASE("testing to_upper") {
+    CHECK(to_upper("aAaAAbb") == "AAAAABB");
+    CHECK(to_upper("aAaAA  bb") == "AAAAA  BB");
+}
 
-    auto a = split_str("name=%s age=%d aaaaaaaaa", "=%");
-    std::cout << to_string(a) << "\n";
-
-    auto b = split_chars("name=%s age=%d aaaaaaaaa", "=s");
-    std::cout << to_string(b) << "\n";
-
-    auto c = split_str("aaaa bbbb cccc");
-    auto d = join(b, " ");
-    std::cout << "c " << to_string(c) << "\n";
-
-    std::vector<int> testformat = {1, 2, 34};
-    std::cout << to_string(testformat) << "\n";
-
-    std::cout << has_prefix("jjjaaa", "jj") << "\n";
-    std::cout << has_suffix("jjjaaa", "jj") << "\n";
-
+TEST_CASE("testing ltrim") {
+    CHECK(ltrim("hello world", "eh") == "llo world");
+    CHECK(ltrim(" hello world", "eh") == " hello world");
+    CHECK(ltrim("   hello world") == "hello world");
+    CHECK(ltrim("hello world   ") == "hello world   ");
     
-    std::cout << contains("jjjjzzzbbb", "zzz") << "\n";
-    
-    std::cout << format("name=%s age=%d", "jack", 18) << "\n";
+}
 
-    auto amap = std::map < std::string, int> {{"1", 2}, {"3", 4}, {"5", 6}};
-    std::cout << to_string(amap) << "\n";
+TEST_CASE("testing rtrim") {
+    CHECK(rtrim("hello world", "drl") == "hello wo");
+    CHECK(rtrim("hello world ", "eh") == "hello world ");
+    CHECK(rtrim(" hello world") == " hello world");
+    CHECK(rtrim("hello world   ") == "hello world");
+}
 
-    return 0;
+TEST_CASE("testing trim") {
+    CHECK(trim("hello world", "drl") == "hello wo");
+    CHECK(trim("hello world", "he") == "llo world");
+    CHECK(trim("hello world", "ehd") == "llo worl");
+    CHECK(trim("   hello world ") == "hello world");
+    CHECK(trim("hello world   ") == "hello world");
+    CHECK(trim("   hello world") == "hello world");
+    CHECK(trim("   hello world", "   hello world") == "");
+}
+
+TEST_CASE("testing split_str") {
+    CHECK(split_str("hello world", "lo") == std::vector<std::string>{"hel", " world"});
+    CHECK(split_str("hello world ") == std::vector<std::string> {"hello", "world"});
+}
+
+TEST_CASE("testing split_chars") {
+    CHECK(split_chars("hello world", "lo") == std::vector<std::string> {"he", "", "", " w", "r", "d"});
+    CHECK(split_chars("hello world ") == std::vector<std::string> {"hello", "world", ""});
+}
+
+TEST_CASE("testing join") {
+    std::vector<std::string> va = {"aa", "bb", "cc"};
+    CHECK(join(va, "lo") == "aalobblocc");
+    CHECK(join(va, " ") == "aa bb cc");
+    CHECK(join(va, "") == "aabbcc");
+}
+
+TEST_CASE("testing to_string vector") {
+    std::vector<std::string> va = {"aa", "bb", "cc"};
+    CHECK(to_string(va) == "[\"aa\", \"bb\", \"cc\"]");
+}
+
+TEST_CASE("testing to_string map") {
+    std::map<std::string, int> ma = {{"aa", 1}, {"bb", 2}, {"cc", 3}};
+    CHECK(to_string(ma) == R"({"aa": 1, "bb": 2, "cc": 3})");
+}
+
+TEST_CASE("testing has_prefix") {
+    CHECK(has_prefix("aabbdd", "aa") == true);
+    CHECK(has_prefix(" aabbdd", "aa") == false);
+}
+
+TEST_CASE("testing has_suffix") {
+    CHECK(has_suffix("aabbddzz", "zz") == true);
+    CHECK(has_suffix(" aabbdd ", "aa") == false);
+}
+
+TEST_CASE("testing contains") {
+    CHECK(contains("aabbddzza", "zz") == true);
+    CHECK(contains(" ababbdd ", "aa") == false);
+}
+
+TEST_CASE("testing format") {
+    CHECK(format("name=%s age=%d", "aa", 18) == "name=aa age=18");
 }

@@ -49,7 +49,7 @@ namespace scpp
     template<typename T1, typename T2>
     std::string to_string(const std::map<T1, T2> m) {
         std::stringstream ss;
-        ss << "[";
+        ss << "{";
         for (auto it = m.cbegin(); it != m.cend(); ++it) {
             if (it == m.cbegin()) {
                 if (std::is_same<T1, std::string>::value)
@@ -66,14 +66,14 @@ namespace scpp
                     ss << ", " << "\"" << it->first << "\"";
                 else
                     ss << ", " << it->first;
-                ss << ":";
+                ss << ": ";
                 if (std::is_same<T2, std::string>::value)
                     ss << "\"" << it->second << "\"";
                 else
                     ss << it->second;
             }
         }
-        ss << "]";
+        ss << "}";
         return ss.str();
     }
 }

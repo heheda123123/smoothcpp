@@ -36,4 +36,4 @@ the test dir is the best tutorial
 * join
 * has_prefix has_suffix contains
 * format, replcement of sprintf
-* format, print vector and map values
+* to_string, support print vector and map

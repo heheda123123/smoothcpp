@@ -6,7 +6,7 @@ using namespace scpp;
 
 int main()
 {
-    std::cout << to_lower("aaaAAbb") << "\n";
+    std::cout << to_lower("aAaAAbb") << "\n";
     std::cout << to_upper("aaaAAbb") << "\n";
 
     std::cout << ltrim("hello world", "eh") << std::endl;

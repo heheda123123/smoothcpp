@@ -2,14 +2,15 @@ add_rules("mode.debug", "mode.release")
 
 set_languages("c++17")
 
-option("test")
-option_end()
+-- option("test")
+-- option_end()
 
-if has_config("test") then
-    add_requires("doctest")
-end
+-- if has_config("test") then
+--     add_requires("doctest")
+-- end
 
-
+add_requires("doctest")
+    
 target("smoothcpp")
 set_kind("$(kind)")
 add_files("scpp/**.cpp")

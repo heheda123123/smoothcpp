@@ -47,11 +47,11 @@ the test dir is the best tutorial
 
 ### Option class
 * Create Option object with program intro
-* add method set must arguments, need indicate arg_name arg_type arg_desc, optional default_value in the end
+* add method set must arguments, need indicate arg_name arg_type arg_desc [default_value]
 * add_opt method set optional arguments
 * parse method parse argc and argv
 * get method return Any object
-* has method judge if arg exists
+* has method judge if arg exists in parse results
 
 ## todo
 * add log lib

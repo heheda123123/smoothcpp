@@ -1,7 +1,6 @@
-#include "any.h"
-#include <sstream>
 #include <stdexcept>
 #include <scpp/string/string.h>
+#include <scpp/any/any.h>
 
 using namespace scpp;
 

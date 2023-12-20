@@ -1,9 +1,9 @@
-#include "time.h"
 #include <iostream>
 #include <chrono>
 #include <sstream>
 #include <iomanip>
 #include <thread>
+#include <scpp/time/time.h>
 
 using namespace scpp;
 

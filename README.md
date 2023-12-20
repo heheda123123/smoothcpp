@@ -10,9 +10,10 @@ Has the following characteristics:
 * all funcs use doctest test
 
 ## feature
-* time
-* string
-* any
+* Time class
+* string funcs
+* Any class
+* Option class
 
 ## build
 compiler need support c++ 17  
@@ -21,7 +22,7 @@ in source code dir, run `xmake`
 ## feature details
 the test dir is the best tutorial
 
-### time lib funcs
+### Time class
 * create Time object will record current time
 * show method will print the time
 * format method accept strftime format string to generate string
@@ -30,7 +31,7 @@ the test dir is the best tutorial
 * elapse method get n milliseconds from constructor or call reset
 * reset the Time start time
 
-### string lib funcs
+### string funcs
 * to_lower to_upper
 * ltrim rtrim trim
 * split_str split_chars
@@ -39,11 +40,18 @@ the test dir is the best tutorial
 * format, replcement of sprintf
 * to_string, support print vector and map
 
-### any lib funcs
+### Any class
 * Any class construct with bool/short/int/double/string(const char*)
 * Any object can cast to above type
 * Different types of conversions should be as intuitive as possible
 
+### Option class
+* Create Option object with program intro
+* add method set must arguments, need indicate arg_name arg_type arg_desc, optional default_value in the end
+* add_opt method set optional arguments
+* parse method parse argc and argv
+* get method return Any object
+* has method judge if arg exists
+
 ## todo
 * add log lib
-* add argparse lib

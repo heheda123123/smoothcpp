@@ -4,7 +4,7 @@
 #include <cstdarg>
 #include <cctype>
 #include <memory>
-#include "string.h"
+#include <scpp/string/string.h>
 
 std::string scpp::to_lower(std::string str)
 {

@@ -1,8 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest/doctest.h"
 #include <scpp/any/any.h>
-#include "scpp/string/string.h"
-#include <sstream>
 
 using namespace scpp;
 
@@ -88,4 +86,21 @@ TEST_CASE("testing Any double like string") {
     CHECK(cc == 123);
     CHECK(dd == 123.3);
     CHECK(ee == "123.3");
+}
+
+TEST_CASE("testing Any compare") {
+    Any zz;
+    Any aa = "123.3";
+    Any bb = true;
+    Any cc = 12;
+    Any dd = "11.11";
+    Any ee = "zzz";
+    Any ff = Any{};
+    CHECK(zz != aa);
+    CHECK(zz != bb);
+    CHECK(zz != cc);
+    CHECK(zz != dd);
+    CHECK(zz != ee);
+    CHECK(zz == Any{});
+    CHECK(zz == ff);
 }

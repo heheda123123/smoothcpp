@@ -4,61 +4,106 @@
 
 using namespace scpp;
 
-TEST_CASE("testing Option get bool arg") {
-	Option opt;
-	opt.add("aa", true, opt.T_BOOL, true, "arg aa");
-	const char *arg[4] = {"-aa", "world", "example", "hello"};
-	opt.parse(5, arg);
-	bool data_aa = opt.get("aa");
-	CHECK(data_aa == true);
-	bool has_aa = opt.has("aa");
-	CHECK(has_aa == true);
+TEST_CASE("testing Option add bool") {
+    Option opt;
+    opt.add("name", Option::V_BOOL, "arg name");
+    const char *arg[5] = {"./a.out", "-name", "world", "example", "hello"};
+    opt.parse(5, arg);
+    bool data_name = opt.get("name");
+    CHECK(data_name == true);
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
 }
 
-TEST_CASE("testing Option get int arg") {
-	Option opt;
-	opt.add("aa", 123, opt.T_INT, true, "arg aa");
-	const char *arg[5] = {"./a.out", "-aa", "123", "-cc", "hello"};
-	opt.parse(5, arg);
-	int data_aa = opt.get("aa");
-	CHECK(data_aa == 123);
-	bool has_aa = opt.has("aa");
-	CHECK(has_aa == true);
+TEST_CASE("testing Option add string use default value") {
+    Option opt;
+    opt.add("name", Option::V_STRING, "arg name", "aaa");
+    const char *arg[5] = {"./a.out", "-name", "world", "example", "hello"};
+    opt.parse(5, arg);
+    std::string data_name = opt.get("name");
+    CHECK(data_name == "world");
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
 }
 
-TEST_CASE("testing Option get double arg") {
-	Option opt;
-	opt.add("aa", 123.0, opt.T_DOUBLE, true, "arg aa");
-	const char *arg[5] = {"./a.out", "-aa", "123", "-cc", "hello"};
-	opt.parse(5, arg);
-	double data_aa = opt.get("aa");
-	CHECK(data_aa == 123.0);
-	bool has_aa = opt.has("aa");
-	CHECK(has_aa == true);
+TEST_CASE("testing Option add string use default value") {
+    Option opt;
+    opt.add("name", Option::V_STRING, "arg name", "xzz");
+
+    const char *arg[5] = {"./a.out", "-aa", "world", "example", "hello"};
+    opt.parse(5, arg);
+
+    std::string data_name = opt.get("name");
+    CHECK(data_name == "xzz");
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
 }
 
-TEST_CASE("testing Option get string arg") {
-	Option opt;
-	opt.add("aa", "123", opt.T_INT, true, "arg aa");
-	const char *arg[5] = {"./a.out", "-aa", "222", "-cc", "hello"};
-	opt.parse(5, arg);
-	std::string data_aa = opt.get("aa");
-	CHECK(data_aa == "123");
-	bool has_aa = opt.has("aa");
-	CHECK(has_aa == true);
+TEST_CASE("testing Option add int") {
+    Option opt;
+    opt.add("name", Option::V_NUMBER, "arg name");
+    const char *arg[5] = {"./a.out", "-name", "123", "example", "hello"};
+    opt.parse(5, arg);
+    int data_name = opt.get("name");
+    CHECK(data_name == 123);
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
 }
 
-TEST_CASE("testing Option much test once") {
-	Option opt;
-	opt.add("aa", 111, opt.T_INT, true, "arg aa");
-	opt.add("bb", "123", opt.T_STRING, false, "arg aa");
-	opt.add("cc", true, opt.T_BOOL, true, "arg aa");
-	const char *arg[5] = {"./a.out","-aa", "123", "-cc", "hello"};
-	opt.parse(5, arg);
-	int data_aa = opt.get("aa");
-	CHECK(data_aa == 123);
-	bool has_bb = opt.has("bb");
-	CHECK(has_bb == false);
-	bool cc = opt.get("cc");
-	CHECK(cc == true);
+TEST_CASE("testing Option add double") {
+    Option opt;
+    opt.add("name", Option::V_NUMBER, "arg name");
+    const char *arg[5] = {"./a.out", "-name", "123.1", "example", "hello"};
+    opt.parse(5, arg);
+    double data_name = opt.get("name");
+    CHECK(data_name == 123.1);
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
+}
+
+TEST_CASE("testing Option add string") {
+    Option opt;
+    opt.add("name", Option::V_STRING, "arg name");
+    const char *arg[5] = {"./a.out", "-name", "world", "example", "hello"};
+    opt.parse(5, arg);
+    std::string data_name = opt.get("name");
+    CHECK(data_name == "world");
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
+}
+
+TEST_CASE("testing Option add number no arg value") {
+    Option opt;
+    opt.add("name", Option::V_NUMBER, "arg name");
+    const char *arg[2] = {"./a.out", "-name"};
+    CHECK_THROWS_WITH(opt.parse(2, arg), "Not enough parameters provided");
+}
+
+TEST_CASE("testing Option default value mismatch type") {
+    Option opt;
+    CHECK_THROWS_WITH(opt.add("name", Option::V_NUMBER, "arg name", "heheda"), "default value type conflict");
+}
+
+TEST_CASE("testing Option default value mismatch type") {
+    Option opt;
+    CHECK_THROWS_WITH(opt.add_opt("name", Option::V_NUMBER, "arg name", "heheda"), "default value type conflict");
+}
+
+TEST_CASE("testing Option add_opt string") {
+    Option opt;
+    opt.add_opt("name", Option::V_STRING, "arg name");
+    const char *arg[5] = {"./a.out", "-aa", "world", "example", "hello"};
+    opt.parse(5, arg);
+
+    std::string data_name = opt.get("name");
+    CHECK(data_name == "");
+    bool has_name = opt.has("name");
+    CHECK(has_name == false);
+}
+
+TEST_CASE("testing Option add string no arg key") {
+    Option opt;
+    opt.add("name", Option::V_STRING, "arg name");
+    const char *arg[5] = {"./a.out", "-aa", "world", "example", "hello"};
+    CHECK_THROWS_WITH(opt.parse(5, arg), "required arg not provided");
 }

@@ -41,7 +41,7 @@ the test dir is the best tutorial
 * to_string, support print vector and map
 
 ### Any class
-* Any class construct with bool/short/int/double/string(const char*)
+* Any class construct with bool/short/int/long/float/double/string/const char*/unsigned ...
 * Any object can cast to above type
 * Different types of conversions should be as intuitive as possible
 

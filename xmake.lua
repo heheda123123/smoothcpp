@@ -8,17 +8,19 @@ option_end()
 if has_config("test") then
     add_requires("doctest")
 end
-
--- add_requires("doctest")
     
 target("smoothcpp")
 set_kind("$(kind)")
 add_files("scpp/**.cpp")
 add_includedirs(".", {public = true})
 add_headerfiles("(scpp/**.h)")
-if is_plat("windows") and is_kind("shared") then
-    add_rules("utils.symbols.export_all", {export_classes = true})
+if is_plat("windows")then
+    add_defines("WIN32_LEAN_AND_MEAN")
+    if is_kind("shared") then
+        add_rules("utils.symbols.export_all", {export_classes = true})
+    end
 end
+
 add_options("test")
 
 

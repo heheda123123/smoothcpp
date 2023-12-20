@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release")
 
-set_languages("c++17")
+set_languages("c++11")
 
 option("test")
 option_end()

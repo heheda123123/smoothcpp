@@ -13,18 +13,18 @@ namespace scpp
     std::string to_lower(std::string input);
     std::string to_upper(std::string input);
 
-    std::string ltrim(std::string_view input, std::string_view trims = " ");
-    std::string rtrim(std::string_view input, std::string_view trims = " ");
-    std::string trim(std::string_view input, std::string_view trims = " ");
+    std::string ltrim(const std::string & input, const std::string & trims = " ");
+    std::string rtrim(const std::string & input, const std::string & trims = " ");
+    std::string trim(const std::string & input, const std::string & trims = " ");
 
     std::vector<std::string> split_str(const std::string & input, const std::string & separator = " ");
     std::vector<std::string> split_chars(const std::string & input, const std::string & separator = " ");
 
-    std::string join(const std::vector<std::string> &input, std::string_view separator);
+    std::string join(const std::vector<std::string> &input, const std::string & separator);
 
-    bool has_prefix(std::string_view input, std::string_view prefix);
-    bool has_suffix(std::string_view input, std::string_view suffix);
-    bool contains(std::string_view str, std::string_view substr);
+    bool has_prefix(const std::string & input, const std::string & prefix);
+    bool has_suffix(const std::string & input, const std::string & suffix);
+    bool contains(const std::string & str, const std::string & substr);
 
     std::string format(const char *format,...);
 

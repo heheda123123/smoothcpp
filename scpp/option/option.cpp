@@ -10,7 +10,7 @@ Option::Item::Item(std::string arg_key, Any::Type arg_type, bool required, std::
 {   
 }
 
-Option::Option(std::string_view program_info): m_prog_info(program_info) {}
+Option::Option(const std::string& program_info): m_prog_info(program_info) {}
 
 void Option::add(const std::string& key, Option::Type arg_type, const std::string& help_info, Any default_value) {
     Any::Type _type;
@@ -68,7 +68,7 @@ void Option::parse(int argc, const char **argv) {
     }
 }
 
-Any Option::get(std::string_view key) {
+Any Option::get(const std::string& key) {
     for (const auto &item : m_options) {
         if (item.arg_key == key) {
             return item.value;
@@ -77,7 +77,7 @@ Any Option::get(std::string_view key) {
     return Any{};
 }
 
-bool Option::has(std::string_view key) {
+bool Option::has(const std::string& key) {
     for (const auto &item : m_options) {
         if (item.arg_key == key && item.parsed) {
             return true;

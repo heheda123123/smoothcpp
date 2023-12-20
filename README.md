@@ -51,6 +51,7 @@ the test dir is the best tutorial
 * Different types of conversions should be as intuitive as possible
 
 ### Option class
+* useful argument parse tools
 * Create Option object with program intro
 * add method set must arguments, need indicate arg_name arg_type arg_desc [default_value]
 * add_opt method set optional arguments

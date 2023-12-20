@@ -2,15 +2,24 @@ add_rules("mode.debug", "mode.release")
 
 set_languages("c++17")
 
-if is_mode("debug") then
+option("test")
+option_end()
+
+if has_config("test") then
     add_requires("doctest")
 end
+
 
 target("smoothcpp")
 set_kind("$(kind)")
 add_files("scpp/**.cpp")
 add_includedirs(".", {public = true})
 add_headerfiles("(scpp/**.h)")
+if is_plat("windows") and is_kind("shared") then
+    add_rules("utils.symbols.export_all", {export_classes = true})
+end
+add_options("test")
+
 
 for _, file in ipairs(os.files("test/*.cpp")) do
     local name = path.basename(file)
@@ -22,4 +31,6 @@ for _, file in ipairs(os.files("test/*.cpp")) do
     add_tests("default")
     add_deps("smoothcpp")
 end
+
+
 

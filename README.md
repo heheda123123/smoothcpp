@@ -17,7 +17,12 @@ Has the following characteristics:
 
 ## build
 compiler need support c++ 17  
-in source code dir, run `xmake`  
+in source code dir, run `xmake`
+### build test
+```
+xmake f --test=y
+xmake test
+```
 
 ## feature details
 the test dir is the best tutorial

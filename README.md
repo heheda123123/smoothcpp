@@ -40,9 +40,9 @@ the test dir is the best tutorial
 * to_string, support print vector and map
 
 ### any lib funcs
-* Any class construct with bool/int/double/string(const char*)
+* Any class construct with bool/short/int/double/string(const char*)
 * Any object can cast to above type
-* type mismatch will cause logic_error exception
+* Different types of conversions should be as intuitive as possible
 
 ## todo
 * add log lib

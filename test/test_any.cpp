@@ -7,54 +7,85 @@
 using namespace scpp;
 
 TEST_CASE("testing Any null") {
-	Any a;
-    std::stringstream ss;
-    ss << a;
-    CHECK(contains(ss.str(), "type: null") == true);
-    int b;
-    CHECK_THROWS_WITH(b = a, "not int type");
+    Any aa;
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == false);
+    CHECK(cc == 0);
+    CHECK(dd == 0);
+    CHECK(ee == "");
 }
 
 TEST_CASE("testing Any bool") {
-	Any a = true;
-    std::stringstream ss;
-    ss << a;
-    CHECK(contains(ss.str(), "type: bool") == true);
-    int b;
-    CHECK_THROWS_WITH(b = a, "not int type");
-    bool c = a;
-    CHECK(c == true);
+    Any aa = true;
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 1);
+    CHECK(dd == 1);
+    CHECK(ee == "true");
 }
 
 TEST_CASE("testing Any int") {
-	Any a = 123;
-    std::stringstream ss;
-    ss << a;
-    CHECK(contains(ss.str(), "type: int") == true);
-    bool b;
-    CHECK_THROWS_WITH(b = a, "not bool type");
-    int c = a;
-    CHECK(c == 123);
+    Any aa = 123;
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 123);
+    CHECK(dd == 123);
+    CHECK(ee == "123");
 }
 
 TEST_CASE("testing Any double") {
-	Any a = 123.1;
-    std::stringstream ss;
-    ss << a;
-    CHECK(contains(ss.str(), "type: double") == true);
-    bool b;
-    CHECK_THROWS_WITH(b = a, "not bool type");
-    double c = a;
-    CHECK(c == 123.1);
+    Any aa = 123.1;
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 123);
+    CHECK(dd == 123.1);
+    CHECK(ee == "123.1");
 }
 
 TEST_CASE("testing Any string") {
-	Any a = "123";
-    std::stringstream ss;
-    ss << a;
-    CHECK(contains(ss.str(), "type: string") == true);
-    bool b;
-    CHECK_THROWS_WITH(b = a, "not bool type");
-    std::string c = a;
-    CHECK(c == "123");
+    Any aa = "xxx";
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 0);
+    CHECK(dd == 0);
+    CHECK(ee == "xxx");
+}
+
+TEST_CASE("testing Any int like string") {
+    Any aa = "123";
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 123);
+    CHECK(dd == 123);
+    CHECK(ee == "123");
+}
+
+TEST_CASE("testing Any double like string") {
+    Any aa = "123.3";
+    bool bb = aa;
+    int cc = aa;
+    double dd = aa;
+    std::string ee = aa;
+    CHECK(bb == true);
+    CHECK(cc == 123);
+    CHECK(dd == 123.3);
+    CHECK(ee == "123.3");
 }

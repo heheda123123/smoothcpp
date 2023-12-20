@@ -16,7 +16,7 @@ Has the following characteristics:
 * Option class
 
 ## build
-compiler need support c++ 11  
+compiler need support c++ 17  
 in source code dir, run `xmake`
 ### build test
 ```

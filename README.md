@@ -60,4 +60,12 @@ the test dir is the best tutorial
 * has method judge if arg exists in parse results
 
 ## todo
-* add log lib
+* log
+* thread pool
+* json
+* xml
+* reactor
+* http
+* base64/md5/sha256/aes
+* compress
+* char encoding

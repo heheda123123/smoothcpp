@@ -4,6 +4,9 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <list>
+#include <unordered_map>
+#include <set>
 
 namespace scpp
 {
@@ -27,6 +30,27 @@ namespace scpp
 
     template<typename T>
     std::string to_string(const std::vector<T> v) {
+        std::stringstream ss;
+        ss << "[";
+        for (auto it = v.cbegin(); it != v.cend(); ++it) {
+            if (it == v.cbegin()) {
+                if (std::is_same<T, std::string>::value)
+                    ss << "\"" << *it << "\"";
+                else
+                    ss << *it;
+            } else {
+                if (std::is_same<T, std::string>::value)
+                    ss << ", " << "\"" << *it << "\"";
+                else
+                    ss << ", " << *it;
+            }
+        }
+        ss << "]";
+        return ss.str();
+    }
+
+    template<typename T>
+    std::string to_string(const std::list<T> v) {
         std::stringstream ss;
         ss << "[";
         for (auto it = v.cbegin(); it != v.cend(); ++it) {
@@ -71,6 +95,58 @@ namespace scpp
                     ss << "\"" << it->second << "\"";
                 else
                     ss << it->second;
+            }
+        }
+        ss << "}";
+        return ss.str();
+    }
+
+    template<typename T1, typename T2>
+    std::string to_string(const std::unordered_map<T1, T2> m) {
+        std::stringstream ss;
+        ss << "{";
+        for (auto it = m.cbegin(); it != m.cend(); ++it) {
+            if (it == m.cbegin()) {
+                if (std::is_same<T1, std::string>::value)
+                    ss << "\"" << it->first << "\"";
+                else
+                    ss << it->first;
+                ss << ": ";
+                if (std::is_same<T2, std::string>::value)
+                    ss << "\"" << it->second << "\"";
+                else
+                    ss << it->second;
+            } else {
+                if (std::is_same<T1, std::string>::value)
+                    ss << ", " << "\"" << it->first << "\"";
+                else
+                    ss << ", " << it->first;
+                ss << ": ";
+                if (std::is_same<T2, std::string>::value)
+                    ss << "\"" << it->second << "\"";
+                else
+                    ss << it->second;
+            }
+        }
+        ss << "}";
+        return ss.str();
+    }
+
+    template<typename T>
+    std::string to_string(const std::set<T> v) {
+        std::stringstream ss;
+        ss << "{";
+        for (auto it = v.cbegin(); it != v.cend(); ++it) {
+            if (it == v.cbegin()) {
+                if (std::is_same<T, std::string>::value)
+                    ss << "\"" << *it << "\"";
+                else
+                    ss << *it;
+            } else {
+                if (std::is_same<T, std::string>::value)
+                    ss << ", " << "\"" << *it << "\"";
+                else
+                    ss << ", " << *it;
             }
         }
         ss << "}";

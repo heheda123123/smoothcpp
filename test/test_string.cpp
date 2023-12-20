@@ -67,6 +67,21 @@ TEST_CASE("testing to_string map") {
     CHECK(to_string(ma) == R"({"aa": 1, "bb": 2, "cc": 3})");
 }
 
+TEST_CASE("testing to_string unordered_map") {
+    std::unordered_map<std::string, int> ma = {{"aa", 1}, {"bb", 2}, {"cc", 3}};
+    CHECK(to_string(ma) == R"({"aa": 1, "bb": 2, "cc": 3})");
+}
+
+TEST_CASE("testing to_string list") {
+    std::set<std::string> va = {"aa", "bb", "cc"};
+    CHECK(to_string(va) == "{\"aa\", \"bb\", \"cc\"}");
+}
+
+TEST_CASE("testing to_string set") {
+    std::list<std::string> va = {"aa", "bb", "cc"};
+    CHECK(to_string(va) == "[\"aa\", \"bb\", \"cc\"]");
+}
+
 TEST_CASE("testing has_prefix") {
     CHECK(has_prefix("aabbdd", "aa") == true);
     CHECK(has_prefix(" aabbdd", "aa") == false);

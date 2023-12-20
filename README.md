@@ -37,8 +37,8 @@ the test dir is the best tutorial
 * split_str split_chars
 * join
 * has_prefix has_suffix contains
-* format, replcement of sprintf
-* to_string, support print vector and map
+* format, replcement of ssprintf
+* to_string, support commong container
 
 ### Any class
 * Any class construct with bool/short/int/long/float/double/string/const char*/unsigned ...

@@ -44,6 +44,7 @@ the test dir is the best tutorial
 * has_prefix has_suffix contains
 * format, replcement of ssprintf
 * to_string, support commong container
+* hexdump, print string with readable format 
 * gbk2utf8, utf82gbk (only in windows)
 
 ### Any class

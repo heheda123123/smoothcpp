@@ -69,4 +69,3 @@ the test dir is the best tutorial
 * http
 * base64/md5/sha256/aes
 * compress
-* char encoding

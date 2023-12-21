@@ -10,8 +10,18 @@ TEST_CASE("testing to_lower") {
     CHECK(to_lower("aAaAA  bb") == "aaaaa  bb");
 }
 
+TEST_CASE("testing to_lower with chinese") {
+    CHECK(to_lower("aAaA∫«∫«ﬂ’Abƒ„∫√b") == "aaaa∫«∫«ﬂ’abƒ„∫√b");
+    CHECK(to_lower("aAaAA  bb") == "aaaaa  bb");
+}
+
 TEST_CASE("testing to_upper") {
     CHECK(to_upper("aAaAAbb") == "AAAAABB");
+    CHECK(to_upper("aAaAA  bb") == "AAAAA  BB");
+}
+
+TEST_CASE("testing to_upper with chinese") {
+    CHECK(to_upper("aAaAAbπ∑∏Áb") == "AAAAABπ∑∏ÁB");
     CHECK(to_upper("aAaAA  bb") == "AAAAA  BB");
 }
 
@@ -20,7 +30,6 @@ TEST_CASE("testing ltrim") {
     CHECK(ltrim(" hello world", "eh") == " hello world");
     CHECK(ltrim("   hello world") == "hello world");
     CHECK(ltrim("hello world   ") == "hello world   ");
-    
 }
 
 TEST_CASE("testing rtrim") {
@@ -43,6 +52,11 @@ TEST_CASE("testing trim") {
 TEST_CASE("testing split_str") {
     CHECK(split_str("hello world", "lo") == std::vector<std::string>{"hel", " world"});
     CHECK(split_str("hello world ") == std::vector<std::string> {"hello", "world"});
+}
+
+TEST_CASE("testing split_str with chinese") {
+    CHECK(split_str("hello world", "lo") == std::vector<std::string>{"hel", " world"});
+    CHECK(split_str("hello world ∫«∫«ﬂ’") == std::vector<std::string> {"hello", "world", "∫«∫«ﬂ’"});
 }
 
 TEST_CASE("testing split_chars") {
@@ -99,4 +113,18 @@ TEST_CASE("testing contains") {
 
 TEST_CASE("testing format") {
     CHECK(format("name=%s age=%d", "aa", 18) == "name=aa age=18");
+}
+
+TEST_CASE("testing gbk2utf8") {
+    std::string gbk_str("heheda\xce\xd2\xca\xc7\xd0\xa1\xd6\xedni123", 20);
+    std::string utf8_str("heheda\xe6\x88\x91\xe6\x98\xaf\xe5\xb0\x8f\xe7\x8c\xaani123", 24);
+    std::string res = gbk2utf8(gbk_str);
+    CHECK(res == utf8_str);
+}
+
+TEST_CASE("testing utf82gbk") {
+    std::string gbk_str("heheda\xce\xd2\xca\xc7\xd0\xa1\xd6\xedni123", 20);
+    std::string utf8_str("heheda\xe6\x88\x91\xe6\x98\xaf\xe5\xb0\x8f\xe7\x8c\xaani123", 24);
+    std::string res = utf82gbk(utf8_str);
+    CHECK(res == gbk_str);
 }

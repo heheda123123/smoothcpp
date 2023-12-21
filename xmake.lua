@@ -15,7 +15,8 @@ add_files("scpp/**.cpp")
 add_includedirs(".", {public = true})
 add_headerfiles("(scpp/**.h)")
 if is_plat("windows")then
-    add_defines("WIN32_LEAN_AND_MEAN")
+    add_defines("WIN32_LEAN_AND_MEAN", {public = true})
+    add_defines("NOMINMAX", {public = true})
     if is_kind("shared") then
         add_rules("utils.symbols.export_all", {export_classes = true})
     end

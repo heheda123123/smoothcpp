@@ -8,6 +8,10 @@
 #include <unordered_map>
 #include <set>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 namespace scpp
 {
     std::string to_lower(std::string input);
@@ -27,6 +31,15 @@ namespace scpp
     bool contains(const std::string & str, const std::string & substr);
 
     std::string format(const char *format,...);
+
+    void hexdump(const std::string& str);
+
+#ifdef _WIN32
+    std::wstring ansi2unicode(std::string_view ansiStr, unsigned int codePage = CP_ACP);
+    std::string unicode2ansi(std::wstring_view unicodeStr, unsigned int codePage = CP_ACP);
+    std::string gbk2utf8(std::string_view gbkStr);
+    std::string utf82gbk(std::string_view utf8Str);
+#endif
 
     template<typename T>
     std::string to_string(const std::vector<T> v) {

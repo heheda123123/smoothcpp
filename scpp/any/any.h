@@ -3,12 +3,16 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <variant>
+#include <map>
+#include <scpp/string/string.h>
 
 namespace scpp
 {
     class Any
     {
-    public:
+	public:
+		// strong type
         enum class Type
         {
             V_NULL,
@@ -17,81 +21,87 @@ namespace scpp
             V_STRING,
             V_VECTOR,
             V_MAP
-        };
+		};
 
-        Any();
+		using T_VECTOR = std::vector<Any>;
+		using T_MAP = std::map<std::string, Any>;
+		
+
+		Any();
+		~Any() {
+			if (m_type == Type::V_VECTOR) {
+				delete std::get<T_VECTOR*>(m_value);
+			} else if (m_type == Type::V_MAP) {
+				delete std::get<T_MAP*>(m_value);
+			}
+		}
         Any(bool any);
         // V_NUMBER
-        Any(short any);
-        Any(unsigned short any);
         Any(int any);
-        Any(unsigned int any);
-        Any(long any);
-        Any(unsigned long any);
-        Any(float any);
         Any(double any);
         // V_STRING
         Any(const char *any);
         Any(const std::string & any);
         // V_VECTOR
-        Any(const std::vector<Any> v);
-        // V_MAP
+		Any(const T_VECTOR &any);
+		// V_MAP
+		Any(const T_MAP &any);
+
 
         Type type() const;
         bool is_null() const;
         bool is_bool() const;
         bool is_number() const;
-        bool is_string() const;
+		bool is_string() const;
+		bool is_vector() const;
+		bool is_map() const;
 
-        Any & operator = (bool any);
-        Any & operator = (short any);
-        Any & operator = (unsigned short any);
-        Any & operator = (int any);
-        Any & operator = (unsigned int any);
-        Any & operator = (long any);
-        Any & operator = (unsigned long any);
-        Any & operator = (float any);
+
+		Any & operator = (bool any);
+		
+		Any & operator = (int any);
         Any & operator = (double any);
         
         Any & operator = (const char *any);
         Any & operator = (const std::string & any);
         
-        Any & operator = (const Any & any);
+		Any & operator = (const Any & any);
+		
         bool operator == (const Any & other);
         bool operator != (const Any & other);
 
         operator bool();
         operator bool() const;
 
-        operator short();
-        operator short() const;
-        operator unsigned short();
-        operator unsigned short() const;
         operator int();
         operator int() const;
-        operator unsigned int();
-        operator unsigned int() const;
-        operator long();
-        operator long() const;
-        operator unsigned long();
-        operator unsigned long() const;
-        operator float();
-        operator float() const;
         operator double();
         operator double() const;
 
         operator std::string();
-        operator std::string() const;
+		operator std::string() const;
+
+		operator T_VECTOR();
+		operator T_VECTOR() const;
+
+		operator T_MAP();
+		operator T_MAP() const;
 
         friend std::ostream & operator << (std::ostream & os, const Any & value)
-        { 
-            os << value.m_value;
+		{
+			if (value.m_type == Type::V_VECTOR) {
+				os << to_string(*std::get<T_VECTOR*>(value.m_value));
+			} else if (value.m_type == Type::V_VECTOR) {
+				os << to_string(*std::get<T_MAP*>(value.m_value));
+			} else {
+				os << std::get<std::string>(value.m_value);
+			}
             return os;
-        }
+		}
 
-    private:
-        Type m_type;
-        std::string m_value;
+	private:
+		Type m_type;
+		std::variant<T_VECTOR*, T_MAP*, std::string> m_value;
     };
     
 }

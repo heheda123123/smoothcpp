@@ -41,7 +41,7 @@ void hexdump(const std::string& str) {
 }
 
 int main() {
-    std::string data = "hehedaÎÒÊÇĞ¡Öíni123";
+    std::string data = "hehedaæˆ‘æ˜¯å°çŒªni123";
     hexdump(data);
     std::string data1 = scpp::gbk2utf8(data);
     hexdump(data1);

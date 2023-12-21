@@ -11,7 +11,7 @@ TEST_CASE("testing to_lower") {
 }
 
 TEST_CASE("testing to_lower with chinese") {
-    CHECK(to_lower("aAaAºÇºÇßÕAbÄãºÃb") == "aaaaºÇºÇßÕabÄãºÃb");
+    CHECK(to_lower("aAaAå‘µå‘µå“’Abä½ å¥½b") == "aaaaå‘µå‘µå“’abä½ å¥½b");
     CHECK(to_lower("aAaAA  bb") == "aaaaa  bb");
 }
 
@@ -21,7 +21,7 @@ TEST_CASE("testing to_upper") {
 }
 
 TEST_CASE("testing to_upper with chinese") {
-    CHECK(to_upper("aAaAAb¹·¸çb") == "AAAAAB¹·¸çB");
+    CHECK(to_upper("aAaAAbç‹—å“¥b") == "AAAAABç‹—å“¥B");
     CHECK(to_upper("aAaAA  bb") == "AAAAA  BB");
 }
 
@@ -56,7 +56,7 @@ TEST_CASE("testing split_str") {
 
 TEST_CASE("testing split_str with chinese") {
     CHECK(split_str("hello world", "lo") == std::vector<std::string>{"hel", " world"});
-    CHECK(split_str("hello world ºÇºÇßÕ") == std::vector<std::string> {"hello", "world", "ºÇºÇßÕ"});
+    CHECK(split_str("hello world å‘µå‘µå“’") == std::vector<std::string> {"hello", "world", "å‘µå‘µå“’"});
 }
 
 TEST_CASE("testing split_chars") {

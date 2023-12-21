@@ -7,6 +7,7 @@
 #include <list>
 #include <unordered_map>
 #include <set>
+#include <scpp/any/any.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -34,12 +35,11 @@ namespace scpp
 
     void hexdump(const std::string& str);
 
-#ifdef _WIN32
-    std::wstring ansi2unicode(std::string_view ansiStr, unsigned int codePage = CP_ACP);
-    std::string unicode2ansi(std::wstring_view unicodeStr, unsigned int codePage = CP_ACP);
-    std::string gbk2utf8(std::string_view gbkStr);
-    std::string utf82gbk(std::string_view utf8Str);
-#endif
+    std::vector<Any> str2vec(const std::string& str);
+    std::map<std::string, Any> str2map(const std::string& str);
+
+    bool is_digit(std::string str);
+
 
     template<typename T>
     std::string to_string(const std::vector<T> v) {
@@ -165,4 +165,11 @@ namespace scpp
         ss << "}";
         return ss.str();
     }
+
+#ifdef _WIN32
+    std::wstring ansi2unicode(std::string_view ansiStr, unsigned int codePage = CP_ACP);
+    std::string unicode2ansi(std::wstring_view unicodeStr, unsigned int codePage = CP_ACP);
+    std::string gbk2utf8(std::string_view gbkStr);
+    std::string utf82gbk(std::string_view utf8Str);
+#endif
 }

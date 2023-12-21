@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <string>
+#include <vector>
 
 namespace scpp
 {
@@ -13,7 +14,9 @@ namespace scpp
             V_NULL,
             V_BOOL,
             V_NUMBER,
-            V_STRING
+            V_STRING,
+            V_VECTOR,
+            V_MAP
         };
 
         Any();
@@ -30,6 +33,9 @@ namespace scpp
         // V_STRING
         Any(const char *any);
         Any(const std::string & any);
+        // V_VECTOR
+        Any(const std::vector<Any> v);
+        // V_MAP
 
         Type type() const;
         bool is_null() const;

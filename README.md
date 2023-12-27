@@ -48,9 +48,8 @@ the test dir is the best tutorial
 * gbk2utf8, utf82gbk (only in windows)
 
 ### Any class
-* Any class construct with bool/short/int/long/float/double/string/const char*/unsigned ...
-* Any object can cast to above type
-* Different types of conversions should be as intuitive as possible
+* Any class construct with bool/int/double/string/const char*/vector/map
+* Strings and numbers can be converted to each other
 
 ### Option class
 * useful argument parse tools

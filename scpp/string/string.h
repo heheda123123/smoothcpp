@@ -7,7 +7,6 @@
 #include <list>
 #include <unordered_map>
 #include <set>
-#include <scpp/any/any.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -35,13 +34,7 @@ namespace scpp
 
     void hexdump(const std::string& str);
 
-    // std::vector<Any> str2vec(const std::string& str);
-    // std::map<std::string, Any> str2map(const std::string& str);
-
-	bool is_digit(std::string str);
-
-	std::string to_string(const std::vector<Any> v);
-
+    bool is_digit(std::string str);
 
     template<typename T>
     std::string to_string(const std::vector<T> v) {

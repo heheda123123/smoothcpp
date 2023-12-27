@@ -125,11 +125,6 @@ bool scpp::contains(const std::string & str, const std::string & substr) {
     return str.find(substr) != std::string::npos;
 }
 
-std::string scpp::to_string(const std::vector<Any> v) {
-	std::stringstream ss;
-	ss << v;
-	return ss.str();
-}
 
 std::string scpp::format(const char *format,...)
 {
@@ -196,35 +191,6 @@ bool scpp::is_digit(std::string str) {
         return false;
     }
 }
-
-// std::vector<scpp::Any> scpp::str2vec(const std::string& str) {
-//     if (!has_prefix(str, "[") || !has_suffix(str, "]")) {
-//         throw std::logic_error{"not to_string(vector)"};
-//     }
-//     std::string input = str.substr(1).substr(0, str.size() - 1);
-//     std::vector<scpp::Any> result;
-//     auto vinput = split_str(input, ",");
-//     for (const auto &i : vinput) {
-//         std::string item = trim(i);
-//         if (item == "") {
-//             result.push_back("");
-//         } else if (item == "true") {
-//             result.push_back(Any{true});
-//         } else if (has_prefix(item, "\"") || has_prefix(item, "'")) {
-//             item = item.substr(1).substr(0, str.size() - 1);
-//             result.push_back(item);
-//         } else if (is_digit(item)) {
-//             double num = stod(item);
-//             result.push_back(num);
-//         } else if (has_prefix(item, "[")) {
-//             result += str2vec(item);
-//         }
-//     }
-// }
-
-// std::map<std::string, scpp::Any> scpp::str2map(const std::string& str) {
-//     // 
-// }
 
 
 #ifdef _WIN32

@@ -115,6 +115,14 @@ TEST_CASE("testing format") {
     CHECK(format("name=%s age=%d", "aa", 18) == "name=aa age=18");
 }
 
+TEST_CASE("testing is_digit") {
+    CHECK(is_digit("12.1") == true);
+    CHECK(is_digit("12") == true);
+    CHECK(is_digit("1ss2.1") == false);
+}
+
+
+#ifdef _WIN32
 TEST_CASE("testing gbk2utf8") {
     std::string gbk_str("heheda\xce\xd2\xca\xc7\xd0\xa1\xd6\xedni123", 20);
     std::string utf8_str("heheda\xe6\x88\x91\xe6\x98\xaf\xe5\xb0\x8f\xe7\x8c\xaani123", 24);
@@ -128,3 +136,4 @@ TEST_CASE("testing utf82gbk") {
     std::string res = utf82gbk(utf8_str);
     CHECK(res == gbk_str);
 }
+#endif

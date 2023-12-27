@@ -1,51 +1,16 @@
-#include <iostream>
-#include <iomanip>
-#include <scpp/string/string.h>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest/doctest.h"
+#include <scpp/option/option.h>
 
-void hexdump(const std::string& str) {
-    int count = 0;
-    for (unsigned char c : str) {
-        if (count % 16 == 0) {
-            if (count != 0) {
-                std::cout << "  " << std::string(16, ' ') << "  ";
-                for (int i = count - 16; i < count; ++i) {
-                    if (isprint(str[i])) {
-                        std::cout << str[i];
-                    } else {
-                        std::cout << ".";
-                    }
-                }
-                std::cout << std::endl;
-            }
-            std::cout << "  ";
-        }
-        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)c << " ";
-        ++count;
-    }
-    if (count % 16 != 0) {
-        int spaces = (16 - (count % 16)) * 3;
-        if (count % 16 <= 8) {
-            spaces += 2;
-        }
-        std::cout << std::string(spaces, ' ');
-    }
-    std::cout << "  " << std::string(16 - (count % 16), ' ') << "  ";
-    for (int i = count - (count % 16); i < count; ++i) {
-        if (isprint(str[i])) {
-            std::cout << str[i];
-        } else {
-            std::cout << ".";
-        }
-    }
-    std::cout << std::endl;
-}
+using namespace scpp;
 
-int main() {
-    std::string data = "heheda我是小猪ni123";
-    hexdump(data);
-    std::string data1 = scpp::gbk2utf8(data);
-    hexdump(data1);
-    std::string data2 = scpp::utf82gbk(data1);
-    hexdump(data2);
-    return 0;
+TEST_CASE("testing Option add int") {
+    Option opt;
+    opt.add("name", Option::V_NUMBER, "arg name");
+    const char *arg[5] = {"./a.out", "-name", "123", "example", "hello"};
+    opt.parse(5, arg);
+    int data_name = opt.get("name");
+    CHECK(data_name == 123);
+    bool has_name = opt.has("name");
+    CHECK(has_name == true);
 }

@@ -8,6 +8,12 @@ option_end()
 
 if has_config("test") then
     add_requires("doctest")
+    -- Enable asan will make debug fail
+    -- set_policy("build.sanitizer.address", true)
+    -- if is_plat("windows") then
+    --     add_defines("_DISABLE_VECTOR_ANNOTATION")
+    --     add_defines("_DISABLE_STRING_ANNOTATION")
+    -- end
 end
 
 target("smoothcpp")
@@ -17,7 +23,7 @@ target("smoothcpp")
     add_headerfiles("(scpp/**.h)")
     add_options("test")
     
-    if is_plat("windows")then
+    if is_plat("windows") then
         add_defines("WIN32_LEAN_AND_MEAN", {public = true})
         add_defines("NOMINMAX", {public = true})
         if is_kind("shared") then

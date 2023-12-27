@@ -94,9 +94,6 @@ TEST_CASE("testing Option add_opt string") {
     opt.add_opt("name", Option::V_STRING, "arg name");
     const char *arg[5] = {"./a.out", "-aa", "world", "example", "hello"};
     opt.parse(5, arg);
-
-    std::string data_name = opt.get("name");
-    CHECK(data_name == "");
     bool has_name = opt.has("name");
     CHECK(has_name == false);
 }

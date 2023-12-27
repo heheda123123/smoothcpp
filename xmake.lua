@@ -8,7 +8,7 @@ option_end()
 
 if has_config("test") then
     add_requires("doctest")
-    -- Enable asan will make debug fail
+    -- -- Enable asan will make debug fail
     -- set_policy("build.sanitizer.address", true)
     -- if is_plat("windows") then
     --     add_defines("_DISABLE_VECTOR_ANNOTATION")

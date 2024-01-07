@@ -1,16 +1,32 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest/doctest.h"
-#include <scpp/option/option.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <list>
 
-using namespace scpp;
+template <typename Container, typename T>
+bool contains(const Container& container, const T& value) {
+	return std::find(container.begin(), container.end(), value) != container.end();
+}
 
-TEST_CASE("testing Option add int") {
-    Option opt;
-    opt.add("name", Option::V_NUMBER, "arg name");
-    const char *arg[5] = {"./a.out", "-name", "123", "example", "hello"};
-    opt.parse(5, arg);
-    int data_name = opt.get("name");
-    CHECK(data_name == 123);
-    bool has_name = opt.has("name");
-    CHECK(has_name == true);
+int main() {
+	// 示例用法
+	std::vector<int> intVector = {1, 2, 3, 4, 5};
+	std::list<std::string> stringList = {"apple", "orange", "banana"};
+
+	int targetInt = 3;
+	std::string targetString = "kiwi";
+
+	if (contains(intVector, targetInt)) {
+		std::cout << "The vector contains " << targetInt << std::endl;
+	} else {
+		std::cout << "The vector does not contain " << targetInt << std::endl;
+	}
+
+	if (contains(stringList, targetString)) {
+		std::cout << "The list contains " << targetString << std::endl;
+	} else {
+		std::cout << "The list does not contain " << targetString << std::endl;
+	}
+
+	return 0;
 }

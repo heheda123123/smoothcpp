@@ -14,6 +14,7 @@ Has the following characteristics:
 * string funcs
 * Any class
 * Option class
+* container funcs
 
 ## build
 compiler need support c++ 17  
@@ -59,6 +60,9 @@ the test dir is the best tutorial
 * parse method parse argc and argv
 * get method return Any object
 * has method judge if arg exists in parse results
+
+### container funcs
+* contains func can judge if container contians value
 
 ## todo
 * log

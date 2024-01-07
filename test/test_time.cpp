@@ -11,7 +11,7 @@ TEST_CASE("testing Time constructor") {
 }
 
 TEST_CASE("testing Time operator-") {
-    Time t1;
+	Time t1;
     Time::sleep(500);
     Time t2;
     CHECK((t2 - t1 - 500) < 50);
